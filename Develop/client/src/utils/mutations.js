@@ -3,33 +3,58 @@
 // SAVE_BOOK will execute saveBook
 // REMOVE_BOOK will execture removeBook
 import { gql } from '@apollo/client';
-// XXX Need to change variable names
+
 export const LOGIN_USER = gql`
-  mutation createMatchup($tech1: String!, $tech2: String!) {
-    createMatchup(tech1: $tech1, tech2: $tech2) {
-      _id
-      tech1
-      tech2
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const ADD_USER = gql`
-  mutation createVote($_id: String!, $techNum: Int!) {
-    createVote(_id: $_id, techNum: $techNum) {
-      _id
-      tech1
-      tech2
-      tech1_votes
-      tech2_votes
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const SAVE_BOOK = gql`
 mutation
+saveBook(bookData: bookInput) {
+  _id
+  username
+  email
+  savedBooks {
+    bookId
+    author
+    image
+    link
+    synopsis
 `;
 
 export const REMOVE_BOOK = gql`
-mutation
+mutation removeBook($bookId: String!) {
+  removeBook(bookId: $bookId) { 
+    _id
+    username
+    email
+    savedBooks {
+      bookId
+      author
+      image
+      link
+      synopsis
+    }
+  }
+}
 `;
