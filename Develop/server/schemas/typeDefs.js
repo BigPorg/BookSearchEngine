@@ -5,24 +5,25 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
-    username: String
-    email: String
+    username: String!
+    email: String!
     bookCount: Int
     savedBooks: [Book]
   }
 
   type Book {
-    _id: ID!
+    bookId: ID!
     title: String
     author: String
-    coverImage(s): XXX
-    link: XXX
+    coverImage: String
+    link: String
+    synopsis: String
   }
 
 // Auth means authentication
   
   type Auth {
-    token: Id!
+    token: ID!
     user: User
   }
 
@@ -31,9 +32,7 @@ const typeDefs = gql`
     addUser(username: String! email: String! password: String!): Auth
     saveBook(bookData: bookInput!): User
     removeBook(bookId: String!): User
-  }
-
-  input 
+  } 
 
 // does order matter?
 
