@@ -40,6 +40,8 @@ saveBook(bookData: bookInput) {
     image
     link
     synopsis
+  }
+}
 `;
 
 export const REMOVE_BOOK = gql`
