@@ -33,9 +33,9 @@ mutation
 saveBook(bookData: bookInput) {
   _id
   username
-  email
   savedBooks {
     bookId
+    title
     author
     image
     link
@@ -47,7 +47,7 @@ mutation removeBook($bookId: String!) {
   removeBook(bookId: $bookId) { 
     _id
     username
-    email
+    // I don't think I actually need the stuff below XXX??
     savedBooks {
       bookId
       author
