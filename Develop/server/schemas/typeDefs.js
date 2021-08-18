@@ -19,8 +19,6 @@ const typeDefs = gql`
     link: String
     synopsis: String
   }
-
-// Auth means authentication
   
   type Auth {
     token: ID!
@@ -33,8 +31,6 @@ const typeDefs = gql`
     saveBook(bookData: bookInput!): User
     removeBook(bookId: String!): User
   } 
-
-// does order matter?
 
   type Query {
     me: User
