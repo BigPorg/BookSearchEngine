@@ -30,7 +30,8 @@ export const ADD_USER = gql`
 
 export const SAVE_BOOK = gql`
 mutation
-saveBook(bookData: bookInput) {
+saveBook($bookData: bookInput) {
+  saveBook(bookData: $bookData) {
   _id
   username
   savedBooks {
@@ -41,6 +42,7 @@ saveBook(bookData: bookInput) {
     link
     synopsis
   }
+  }
 }
 `;
 
@@ -49,7 +51,6 @@ mutation removeBook($bookId: String!) {
   removeBook(bookId: $bookId) { 
     _id
     username
-    // I don't think I actually need the stuff below XXX??
     savedBooks {
       bookId
       author
