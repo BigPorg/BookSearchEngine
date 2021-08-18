@@ -10,6 +10,7 @@ const { authMiddleware } = require('./utils/auth');
 const app = express();
 const PORT = process.env.PORT || 3001;
 // added server below and requirers above
+// TODO errors showing here, figure out why.
 const server = new ApolloServer({
   typeDefs,
   resolvers,

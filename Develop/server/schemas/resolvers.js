@@ -1,5 +1,6 @@
 // TODO change variables
-const { Tech, Matchup } = require('../models');
+const { User } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
