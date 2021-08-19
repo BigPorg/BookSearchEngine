@@ -40,7 +40,7 @@ saveBook($bookData: bookInput!) {
     author
     image
     link
-    synopsis
+    description
   }
   }
 }
@@ -56,7 +56,7 @@ mutation removeBook($bookId: String!) {
       author
       image
       link
-      synopsis
+      description
     }
   }
 }

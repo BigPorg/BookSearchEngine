@@ -17,7 +17,7 @@ const typeDefs = gql`
     author: String
     coverImage: String
     link: String
-    synopsis: String
+    description: String
   }
   
   type Auth {
@@ -31,7 +31,7 @@ const typeDefs = gql`
     author: String
     coverImage: String
     link: String
-    synopsis: String
+    description: String
  
   }
 

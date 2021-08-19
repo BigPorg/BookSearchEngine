@@ -14,7 +14,7 @@ query me {
             author
             image
             link
-            synopsis
+            description
           }
         }
 
