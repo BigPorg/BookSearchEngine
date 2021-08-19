@@ -8,7 +8,7 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id })
+                const userData = await User.findOne({ _id: context.user._id }).select("-__V -password");
                 return userData;
             } else {
                 throw new AuthenticationError('Error. You must be logged in.')
@@ -21,8 +21,15 @@ const resolvers = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                throw new AuthenticationError('Error, incorrect email or password.')
+                throw new AuthenticationError('Error, incorrect email.');
             }
+
+            const userPassword = await user.isCorrectPassword(password);
+
+            if (!userPassword) {
+                throw new AuthenticationError('Error, incorrect password.');
+            }
+
             const token = signToken(user);
             return { token, user };
         },
@@ -35,21 +42,19 @@ const resolvers = {
 
         saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
-                const updatedBooks = await User.findByIdAndUpdate({ _id: context.user._id }, { $push: { savedBooks: bookData } }, { new: true });
-                return updatedBooks;
-            } else {
-                throw new AuthenticationError('Please log in to save a book to your profile.');
+                const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, { $push: { savedBooks: bookData } }, { new: true });
+                return updatedUser;
             }
+            throw new AuthenticationError('Please log in to save a book to your profile.');
         },
         // can I use find and remove? 
         removeBook: async (parent, args, context) => {
             if (context.user) {
-                const updatedBooks = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { savedBooks: { bookId: args.bookId } } }, { new: true });
+                const updatedUser = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { savedBooks: { bookId } } }, { new: true });
                 console.log(bookToRemove);
-                return updatedBooks;
-            } else {
-                throw new AuthenticationError('Unable to remove book.');
+                return updatedUser;
             }
+            throw new AuthenticationError('Unable to remove book.');
         }
     }
 }
