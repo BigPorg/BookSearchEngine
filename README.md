@@ -1,11 +1,11 @@
-## Book Search Engine
+# Book Search Engine
 Homework 21, Refactoring
 
-# Description
+## Description
 The Book Search Engine gives users the ability to search for books and save them to their account. </br>
 It was built using JavaScript, React, Express, Mongoose, Node, Bootstrap, Apollo, GraohQL and JavaScript Web Token.
 
-# Links and Screenshots
+## Links and Screenshots
 
 ![snip 8-19](https://user-images.githubusercontent.com/80430372/130135321-779b0bde-f903-44fc-b2a4-f049423e0770.PNG)
 Screenshot of app running.
