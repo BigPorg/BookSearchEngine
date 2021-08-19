@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
+const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
 const db = require('./config/connection');
 // const routes = require('./routes');
 const { typeDefs, resolvers } = require('./schemas')
@@ -11,15 +12,24 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 // added server below and requirers above
 // TODO errors showing here, figure out why.
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware
-});
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+//   context: authMiddleware
+// });
 
-server.applyMiddleware({ app });
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+let server;
+async function startServer() {
+  server = new ApolloServer({ typeDefs, resolvers, context: authMiddleware, plugins: [ApolloServerPluginLandingPageGraphQLPlayground()], playground: true });
+
+  await server.start();
+
+  server.applyMiddleware({ app });
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+}
+
+startServer();
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
@@ -41,4 +51,3 @@ db.once('open', () => {
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
 });
-// ASK FOR SERVER.JS HELP WITH STEPHANIE XXXXXXXX

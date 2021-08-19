@@ -72,7 +72,7 @@ const SavedBooks = () => {
     }
 
     if (loading) {
-      return <h3>loading ... </h3>
+      return <h2>loading ... </h2>
     }
   };
 

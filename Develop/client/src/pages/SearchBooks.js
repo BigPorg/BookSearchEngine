@@ -7,6 +7,7 @@ import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 // TODO import files from queries.js
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
+import { searchGoogleBooks } from '../utils/API';
 // import { removeBookId } from '../utils/localStorage';
 
 const SearchBooks = () => {
