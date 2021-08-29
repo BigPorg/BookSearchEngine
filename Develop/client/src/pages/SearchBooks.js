@@ -10,7 +10,7 @@ import { SAVE_BOOK } from '../utils/mutations';
 // import { removeBookId } from '../utils/localStorage';
 
 const SearchBooks = () => {
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  const [saveBook] = useMutation(SAVE_BOOK);
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
@@ -75,12 +75,13 @@ const SearchBooks = () => {
       const { data } = await saveBook({
         variables: { ...bookToSave }
       })
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-
+      if (data) {
+        setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }
+  };
 
   // if (!response.ok) {
   //   throw new Error('something went wrong!');

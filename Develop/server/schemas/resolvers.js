@@ -13,7 +13,7 @@ const resolvers = {
             } else {
                 throw new AuthenticationError('Error. You must be logged in.')
             }
-        }
+        },
     },
     // need mutations for add user, login, save book, remove book
     Mutation: {
@@ -42,7 +42,11 @@ const resolvers = {
 
         saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
-                const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, { $push: { savedBooks: bookData } }, { new: true });
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { savedBooks: bookData } },
+                    { new: true }
+                );
                 return updatedUser;
             }
             throw new AuthenticationError('Please log in to save a book to your profile.');
@@ -50,8 +54,12 @@ const resolvers = {
         // can I use find and remove? 
         removeBook: async (parent, args, context) => {
             if (context.user) {
-                const updatedUser = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { savedBooks: { bookId } } }, { new: true });
-                console.log(bookToRemove);
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: { bookId } } },
+                    { new: true }
+                );
+                // console.log(bookToRemove);
                 return updatedUser;
             }
             throw new AuthenticationError('Unable to remove book.');
