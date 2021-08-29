@@ -44,10 +44,7 @@ const typeDefs = gql`
     addUser(username: String! email: String! password: String!): Auth
     saveBook(bookData: bookInput!): User
     removeBook(bookId: ID!): User
-  } 
-
-
-
+  }
 `;
 
 module.exports = typeDefs;

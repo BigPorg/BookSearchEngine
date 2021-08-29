@@ -19,14 +19,14 @@ const PORT = process.env.PORT || 3001;
 // });
 
 let server;
-async function startServer() {
+async function startApollo() {
   server = new ApolloServer({ typeDefs, resolvers, context: authMiddleware, plugins: [ApolloServerPluginLandingPageGraphQLPlayground()], playground: true });
 
   await server.start();
   server.applyMiddleware({ app });
 }
 
-startServer()
+startApollo()
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
