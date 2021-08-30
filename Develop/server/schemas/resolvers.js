@@ -1,5 +1,6 @@
 // TODO change variables
 const { User } = require('../models');
+const { Book } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -56,8 +57,8 @@ const resolvers = {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { savedBooks: { bookId } } },
-                    { new: true }
+                    { $addToSet: { savedBooks: { ...args } } },
+                    // { new: true }
                 );
                 // console.log(bookToRemove);
                 return updatedUser;
