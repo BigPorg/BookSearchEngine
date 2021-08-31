@@ -1,6 +1,6 @@
 // TODO change variables
 const { User } = require('../models');
-const { Book } = require('../models');
+// const { Book } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
