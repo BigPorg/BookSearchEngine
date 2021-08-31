@@ -63,7 +63,7 @@ const resolvers = {
                 // console.log(bookToRemove);
                 return updatedUser;
             }
-            throw new AuthenticationError('Unable to remove book.');
+            // throw new AuthenticationError('Unable to remove book.');
         }
     }
 }
